@@ -17,8 +17,9 @@ export type ApiErrorAction = {
   error: string;
 };
 
+export type HistoryData = Reading[];
+
 const initialState: any = {
-  timeStampAfter: Date.now() - 1800000,
   metrics: [],
   selectedMetrics: [],
   metricData: {},
@@ -50,6 +51,16 @@ const slice = createSlice({
     },
     metricSelected: (state, action: PayloadAction<Metrics>) => {
       state.selectedMetrics = action.payload;
+    },
+    metricHistoryReceived: (state, action: PayloadAction<HistoryData>) => {
+      const { metric, unit } = action.payload[0];
+      if (state.metricData[metric]) {
+        state.metricData[metric].readings = action.payload.concat(state.metricData[metric]);
+      } else {
+        state.metricData[metric] = {};
+        state.metricData[metric].unit = unit;
+        state.metricData[metric].readings = action.payload;
+      }
     },
   },
 });
