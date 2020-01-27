@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { FormControl, InputLabel, Select, Input, Chip, MenuItem, makeStyles } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { actions } from './reducer';
 
 const queryMetrics = `
   query {
@@ -26,12 +28,18 @@ const MetricSelect: React.FC = () => {
   const [result] = useQuery({ query: queryMetrics });
   const { fetching, data, error } = result;
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (fetching) return;
     if (error) return;
     setMetrics(data.getMetrics);
+    dispatch(actions.metricsRecieved(data.getMetrics));
   }, [fetching, data, error]);
+
+  useEffect(() => {
+    dispatch(actions.metricSelected(selectedMetrics));
+  }, [selectedMetrics]);
 
   return fetching ? (
     <div>loading</div>

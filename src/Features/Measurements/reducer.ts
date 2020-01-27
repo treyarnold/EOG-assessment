@@ -46,7 +46,11 @@ const slice = createSlice({
     },
     measurementApiErrorReceived: (state, action: PayloadAction<ApiErrorAction>) => state,
     metricsRecieved: (state, action: PayloadAction<Metrics>) => {
+      state.metrics = action.payload;
+    },
+    metricSelected: (state, action: PayloadAction<Metrics>) => {
       console.log(action.payload);
+      state.selectedMetrics = action.payload;
     },
   },
 });
