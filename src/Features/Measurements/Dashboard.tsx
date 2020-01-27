@@ -15,13 +15,14 @@ subscription sub {
 `;
 
 const handleSubscription = (measurements: Reading[] = [], response: MeasurementResponse) => {
-  return [response.newMeasurement, ...measurements];
+  return [response.newMeasurement];
 };
 
 const Dashboard: React.FC = () => {
   const [res] = useSubscription({ query: newMeasurements }, handleSubscription);
-
-  console.log(res);
+  const dispatch = useDispatch();
+  if (!res.data) return <div>Loading</div>;
+  dispatch(actions.metricDataRecvied(res.data[0]));
 
   return <div>dashboard</div>;
 };

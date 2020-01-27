@@ -29,6 +29,7 @@ const slice = createSlice({
           value: value,
         });
       } else {
+        state[metric] = {};
         state[metric].unit = unit;
         state[metric].readings = [
           {
