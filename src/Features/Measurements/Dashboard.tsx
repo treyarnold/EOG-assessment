@@ -4,7 +4,7 @@ import { actions, MeasurementResponse, Reading } from './reducer';
 import { useSubscription } from 'urql';
 import { Container, Grid, Box, makeStyles } from '@material-ui/core';
 
-import MetricSelect from './MetricSelect';
+import MetricSelect from '../MetricSelect/MetricSelect';
 import CurrentMeasurements from './CurrentMeasurements';
 
 const newMeasurements = `

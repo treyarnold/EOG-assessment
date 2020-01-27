@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { FormControl, InputLabel, Select, Input, Chip, MenuItem, makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { actions } from './reducer';
+import { actions } from '../Measurements/reducer';
 
 const queryMetrics = `
   query {
@@ -29,7 +29,7 @@ const MetricSelect: React.FC = () => {
   const { fetching, data, error } = result;
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  console.log('selectrender');
   useEffect(() => {
     if (fetching) return;
     if (error) return;

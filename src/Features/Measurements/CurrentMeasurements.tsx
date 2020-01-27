@@ -48,11 +48,7 @@ const CurrentMeasurements: React.FC = () => {
     <Box className={classes.container}>
       {selectedMetrics.length === 0
         ? null
-        : // <div>
-          //   {selectedMetrics}
-          //   {lastMeasurements[selectedMetrics].value}
-          // </div>
-          selectedMetrics.map((data: string) => (
+        : selectedMetrics.map((data: string) => (
             <MetricDisplay key={data} metric={data} value={lastMeasurements[data].value} />
           ))}
     </Box>
