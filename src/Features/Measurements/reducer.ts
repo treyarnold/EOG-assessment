@@ -15,29 +15,31 @@ export type ApiErrorAction = {
   error: string;
 };
 
-const initialState: any = {};
+const initialState: any = {
+  timeStampAfter: Date.now() - 1800000,
+  metrics: [],
+  metricData: {},
+  lastKnown: {},
+};
 
 const slice = createSlice({
   name: 'measurements',
   initialState,
   reducers: {
-    metricDataRecvied: (state, action: PayloadAction<Reading>) => {
+    metricDataReceived: (state, action: PayloadAction<Reading>) => {
       const { metric, at, value, unit } = action.payload;
-      if (state[metric]) {
-        state[metric].readings.push({
-          at: at,
-          value: value,
-        });
+      const reading = {
+        at: at,
+        value: value,
+      };
+      if (state.metricData[metric]) {
+        state.metricData[metric].readings.push(reading);
       } else {
-        state[metric] = {};
-        state[metric].unit = unit;
-        state[metric].readings = [
-          {
-            at: at,
-            value: value,
-          },
-        ];
+        state.metricData[metric] = {};
+        state.metricData[metric].unit = unit;
+        state.metricData[metric].readings = [reading];
       }
+      state.lastKnown[metric] = reading;
     },
     measurementApiErrorReceived: (state, action: PayloadAction<ApiErrorAction>) => state,
   },

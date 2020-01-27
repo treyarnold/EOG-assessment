@@ -22,7 +22,7 @@ const Dashboard: React.FC = () => {
   const [res] = useSubscription({ query: newMeasurements }, handleSubscription);
   const dispatch = useDispatch();
   if (!res.data) return <div>Loading</div>;
-  dispatch(actions.metricDataRecvied(res.data[0]));
+  dispatch(actions.metricDataReceived(res.data[0]));
 
   return <div>dashboard</div>;
 };
