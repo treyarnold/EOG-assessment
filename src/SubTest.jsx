@@ -13,7 +13,6 @@ subscription sub {
 `;
 
 const handleSubscription = (measurements = [], response) => {
-  console.log('reducer response', response);
   return [response.newMeasurement, ...measurements];
 };
 

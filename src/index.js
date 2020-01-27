@@ -8,7 +8,7 @@ import {
 } from 'urql';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-import SubTest from './SubTest.jsx';
+import App from './App';
 
 const subscriptionClient = new SubscriptionClient
   ('ws://react.eogresources.com/graphql', {});
@@ -26,6 +26,6 @@ const client = createClient({
 
 ReactDOM.render(
   <Provider value={client}>
-    <SubTest />
+    <App />
   </Provider>,
   document.getElementById('root'));
