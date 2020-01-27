@@ -11,6 +11,8 @@ export type Reading = {
   unit: string;
 };
 
+export type Metrics = string[];
+
 export type ApiErrorAction = {
   error: string;
 };
@@ -18,6 +20,7 @@ export type ApiErrorAction = {
 const initialState: any = {
   timeStampAfter: Date.now() - 1800000,
   metrics: [],
+  selectedMetrics: [],
   metricData: {},
   lastKnown: {},
 };
@@ -42,6 +45,9 @@ const slice = createSlice({
       state.lastKnown[metric] = reading;
     },
     measurementApiErrorReceived: (state, action: PayloadAction<ApiErrorAction>) => state,
+    metricsRecieved: (state, action: PayloadAction<Metrics>) => {
+      console.log(action.payload);
+    },
   },
 });
 
