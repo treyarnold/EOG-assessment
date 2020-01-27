@@ -49,7 +49,6 @@ const slice = createSlice({
       state.metrics = action.payload;
     },
     metricSelected: (state, action: PayloadAction<Metrics>) => {
-      console.log(action.payload);
       state.selectedMetrics = action.payload;
     },
   },

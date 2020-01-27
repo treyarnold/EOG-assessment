@@ -31,7 +31,6 @@ const App = () => (
     <Provider store={store}>
       <Wrapper>
         <Header />
-        <NowWhat />
         <ToastContainer />
         <Dashboard />
       </Wrapper>
