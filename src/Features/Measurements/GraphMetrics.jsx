@@ -40,7 +40,7 @@ const chartData = {
     },
 
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+      type: 'datetime',
     },
   },
   series: [],
@@ -55,7 +55,7 @@ const GraphMetrics = () => {
   const { metricData, selectedMetrics } = useSelector(getMetrics);
   const classes = useStyles();
   const [chartInfo, setChartInfo] = useState(chartData);
-  console.log(metricData);
+  // console.log(metricData);
 
   const addData = () =>
     setChartInfo({

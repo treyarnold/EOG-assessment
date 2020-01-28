@@ -32,6 +32,7 @@ const CurrentMeasurements: React.FC = () => {
   const selectedMetrics = useSelector(getSelectedMetrics);
   const lastMeasurements = useSelector(getLastMeasurements);
   const classes = useStyles();
+  console.log(lastMeasurements);
   const MetricDisplay: any = (metric: any, value: number) => {
     return (
       <Box className={classes.paperContainer}>
@@ -48,7 +49,7 @@ const CurrentMeasurements: React.FC = () => {
       {selectedMetrics.length === 0
         ? null
         : selectedMetrics.map((data: string) => (
-            <MetricDisplay key={data} metric={data} value={lastMeasurements[data].value} />
+            <MetricDisplay key={data} metric={data} value={lastMeasurements[data]} />
           ))}
     </Box>
   );

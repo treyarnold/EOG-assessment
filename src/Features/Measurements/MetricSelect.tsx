@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { FormControl, InputLabel, Select, Input, Chip, MenuItem, makeStyles } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { actions } from './reducer';
+import { actions, HistoryData } from './reducer';
 import gql from 'graphql-tag';
 
 const queryMetrics = `
@@ -64,7 +64,14 @@ const MetricSelect: React.FC = () => {
   useEffect(() => {
     if (historicalData) {
       if (historicalData.getMeasurements && historicalData.getMeasurements.length > 0) {
-        dispatch(actions.metricHistoryReceived(historicalData.getMeasurements));
+        console.log(historicalData.getMeasurements);
+        const data: HistoryData = {
+          metric: historicalData.getMeasurements[0].metric,
+          unit: historicalData.getMeasurements[0].unit,
+          readings: historicalData.getMeasurements.map((res: any) => [res.at, res.value]),
+        };
+
+        dispatch(actions.metricHistoryReceived(data));
       }
     }
   }, [historicalData, dispatch]);
