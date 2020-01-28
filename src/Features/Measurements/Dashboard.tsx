@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { actions, MeasurementResponse, Reading } from './reducer';
 import { useSubscription } from 'urql';
-import { Box, makeStyles } from '@material-ui/core';
+import { Box, makeStyles, Container } from '@material-ui/core';
 
 import MetricSelect from './MetricSelect';
 import CurrentMeasurements from './CurrentMeasurements';
@@ -40,11 +40,13 @@ const Dashboard: React.FC = () => {
 
   return (
     <>
-      <Box className={classes.container}>
-        <CurrentMeasurements />
-        <MetricSelect />
-      </Box>
-      <GraphMetrics />
+      <Container>
+        <Box className={classes.container}>
+          <CurrentMeasurements />
+          <MetricSelect />
+        </Box>
+        <GraphMetrics />
+      </Container>
     </>
   );
 };

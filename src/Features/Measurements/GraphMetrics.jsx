@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { IState } from '../../store';
-import { makeStyles, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
 const getMetrics = state => {
@@ -18,6 +17,11 @@ const useStyles = makeStyles(() => ({
     dispay: 'flex',
     flexGrow: 1,
     justifyContent: 'center',
+    maxHeight: '100vh',
+  },
+  chart: {
+    width: 'auto',
+    maxHeight: '75%',
   },
 }));
 
@@ -41,50 +45,51 @@ const chartData = {
 
     xaxis: {
       type: 'datetime',
+      labels: {
+        datetimeFormatter: {
+          hour: 'HH:mm',
+        },
+      },
+    },
+    tooltip: {
+      followCursor: true,
+      x: {
+        format: 'HH:mm:ss',
+      },
+    },
+    stroke: {
+      width: 1,
     },
   },
   series: [],
-};
-
-const chartSeries = {
-  name: 'some shit',
-  data: [30, 40, 45, 50, 49, 60, 70, 91],
 };
 
 const GraphMetrics = () => {
   const { metricData, selectedMetrics } = useSelector(getMetrics);
   const classes = useStyles();
   const [chartInfo, setChartInfo] = useState(chartData);
-  console.log(metricData);
 
   useEffect(() => {
     if (selectedMetrics.length) {
-      console.log(metricData[selectedMetrics[0]].chartData);
       const chartData = selectedMetrics.map(metric => {
         const result = {
           ...metricData[metric].chartData,
         };
         return result;
       });
-      console.log(chartData);
-      setChartInfo({
-        ...chartInfo,
-        series: [...chartData],
+      setChartInfo(prevState => {
+        const newState = {
+          ...prevState,
+          series: [...chartData],
+        };
+        return newState;
       });
     }
   }, [selectedMetrics, metricData]);
 
-  const addData = () =>
-    setChartInfo({
-      ...chartInfo,
-      series: [chartSeries],
-    });
-
   return selectedMetrics.length ? (
     <>
-      <Box className={classes.chartContainer} onClick={addData}>
-        <Chart options={chartInfo.options} series={chartInfo.series} />
-      </Box>
+      <Chart className={classes.chart} options={chartInfo.options} series={chartInfo.series} />
     </>
   ) : null;
 };

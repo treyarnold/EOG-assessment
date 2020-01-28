@@ -89,6 +89,7 @@ const MetricSelect: React.FC = () => {
   }, [fetching, data, error, dispatch]);
 
   useEffect(() => {
+    setHeartBeat(Date.now());
     dispatch(actions.metricSelected(selectedMetrics));
   }, [selectedMetrics, dispatch]);
 
