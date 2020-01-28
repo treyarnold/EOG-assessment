@@ -32,7 +32,7 @@ const CurrentMeasurements: React.FC = () => {
   const selectedMetrics = useSelector(getSelectedMetrics);
   const lastMeasurements = useSelector(getLastMeasurements);
   const classes = useStyles();
-  console.log(lastMeasurements);
+
   const MetricDisplay: any = (metric: any, value: number) => {
     return (
       <Box className={classes.paperContainer}>

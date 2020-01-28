@@ -58,7 +58,7 @@ const slice = createSlice({
     metricHistoryReceived: (state, action: PayloadAction<HistoryData>) => {
       const { metric, unit, readings } = action.payload;
       if (state.metricData[metric]) {
-        state.metricData[metric].chartData.data = action.payload.readings.concat(state.metricData[metric]);
+        state.metricData[metric].chartData.data = [...action.payload.readings];
       } else {
         state.metricData[metric] = {};
         state.metricData[metric].unit = unit;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { IState } from '../../store';
 import { makeStyles, Box } from '@material-ui/core';
@@ -55,7 +55,24 @@ const GraphMetrics = () => {
   const { metricData, selectedMetrics } = useSelector(getMetrics);
   const classes = useStyles();
   const [chartInfo, setChartInfo] = useState(chartData);
-  // console.log(metricData);
+  console.log(metricData);
+
+  useEffect(() => {
+    if (selectedMetrics.length) {
+      console.log(metricData[selectedMetrics[0]].chartData);
+      const chartData = selectedMetrics.map(metric => {
+        const result = {
+          ...metricData[metric].chartData,
+        };
+        return result;
+      });
+      console.log(chartData);
+      setChartInfo({
+        ...chartInfo,
+        series: [...chartData],
+      });
+    }
+  }, [selectedMetrics, metricData]);
 
   const addData = () =>
     setChartInfo({

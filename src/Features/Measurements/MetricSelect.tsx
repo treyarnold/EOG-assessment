@@ -64,7 +64,6 @@ const MetricSelect: React.FC = () => {
   useEffect(() => {
     if (historicalData) {
       if (historicalData.getMeasurements && historicalData.getMeasurements.length > 0) {
-        console.log(historicalData.getMeasurements);
         const data: HistoryData = {
           metric: historicalData.getMeasurements[0].metric,
           unit: historicalData.getMeasurements[0].unit,
