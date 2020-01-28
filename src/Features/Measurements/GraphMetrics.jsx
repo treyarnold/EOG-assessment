@@ -41,6 +41,9 @@ const chartData = {
         },
         width: 400,
       },
+      zoom: {
+        enabled: false,
+      },
     },
 
     xaxis: {
