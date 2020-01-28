@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { FormControl, InputLabel, Select, Input, Chip, MenuItem, makeStyles } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { actions } from './reducer';
 import gql from 'graphql-tag';
-import { IState } from '../../store';
 
 const queryMetrics = `
   query {
@@ -40,13 +39,6 @@ const getHeartbeat = `
     heartBeat
   }
 `;
-
-const getMetrics = (state: IState) => {
-  const { metricData } = state.measurements;
-  return {
-    metricData,
-  };
-};
 
 const MetricSelect: React.FC = () => {
   const [metrics, setMetrics] = useState([]);

@@ -35,6 +35,7 @@ const slice = createSlice({
       const reading = {
         at: at,
         value: value,
+        metric: metric,
       };
       if (state.metricData[metric]) {
         state.metricData[metric].readings.push(reading);

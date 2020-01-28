@@ -6,7 +6,7 @@ import { Box, makeStyles } from '@material-ui/core';
 
 import MetricSelect from './MetricSelect';
 import CurrentMeasurements from './CurrentMeasurements';
-import GraphMetrics from './GraphMetrics';
+import GraphMetrics from './GraphMetrics.jsx';
 
 const newMeasurements = `
 subscription sub {
